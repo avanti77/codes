@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+   
+</head>
+<body>
+    <div class="container">
+        <h1>User Registration Form</h1>
+        <div id="form-group">
+            <label for="name">Name <span style="color: red">*</span>:</label>
+            <input type="text" name="name" id="name">
+            <br>
+        </div>
+        <div id="form-group">
+            <label for="email">Email <span style="color: red">*</span>:</label>
+            <input type="text" name="email" id="email">
+            <br>
+        </div>
+        <div id="form-group">
+            <label for="password">Password <span style="color: red">*</span>:</label>
+            <input type="text" name="password" id="password">
+            <br>
+        </div>
+        <div id="form-group">
+            <label for="country">Country<span style="color: red">*</span>:</label>
+            <select id="country">
+                <option value="select">Select a country</option>
+                <option value="USA">USA</option>
+                <option value="Canada">Canada</option>
+                <option value="UK">Uk</option>
+            </select>
+            <br>
+        </div>
+        <button id="submitButton" onclick="submitForm()">Submit</button>
+        <br>
+        <div id="successMessage"><span style="color: greenyellow"></span></div>
+        <div id="errorMessage"><span style="color: red"></span></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+class User{
+    private name:string;
+    private email:string;
+    private password:string;
+    private country:string;
+
+    constructor(name:string,email:string,password:string,country:string)
+    {
+        this.name=name;
+        this.email=email;
+        this.password=password;
+        this.country=country;
+    }
+    public validateData(){
+        let p : Promise<string> = new Promise((resolve,reject) =>{
+            setTimeout(()=>{
+                if(this.name.trim().length==0)
+                {
+                    reject("Name must not be empty.")
+                }
+                else
+                {
+                    let ex=/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/
+                    if(!this.email.match(ex))
+                    {
+                        reject("Email must be a valid email address.");
+                    }
+                    else if(this.password.length < 8)
+                    {
+                        reject("Password must be at least 8 characters long.");
+                    }
+                    else if(this.country=="select")
+                    {
+                        reject("Country must be selected from the predefined list.");
+                    }
+                    else
+                    {
+                        resolve("Success! Registration is complete.");
+                    }
+                }
+                
+                
+            })
+        });
+        return p;
+    }
+
+}
+
+function submitForm()
+{
+    let name=(document.getElementById("name") as HTMLInputElement).value;
+    let email=(document.getElementById("email") as HTMLInputElement).value;
+    let password=(document.getElementById("password") as HTMLInputElement).value;
+    let country=(document.getElementById("country") as HTMLInputElement).value;
+
+    let user=new User(name,email,password,country);
+
+    let promise= user.validateData();
+    promise.then((msg)=> document.getElementById("successMessage").innerHTML=msg)
+    .catch((msg)=> document.getElementById("errorMessage").innerHTML=msg);
+
+}
+
