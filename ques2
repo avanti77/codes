@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+</head>
+<body>
+    <body class="container">
+        <h1>Array Operations</h1>
+        <div id="num">
+            <label for="number1">Enter Number 1*:</label>
+
+            <input type="text" name="number1" id="num1">
+
+        </div>
+
+        <div id="num">
+
+            <label for="number2">Enter Number 2*:</label>
+
+            <input type="text" name="number2" id="num2">
+
+            </div>
+
+        <div id="num">
+
+            <label for="number3">Enter Number 3*:</label>
+
+            <input type="text" name="number3" id="num3">
+
+            </div>
+
+        <div id="num">
+
+            <label for="number4">Enter Number 4*:</label>
+
+            <input type="text" name="number4" id="num4">
+
+            </div>
+
+        <div id="num">
+
+            <label for="number5">Enter Number 5*:</label>
+
+            <input type="text" name="number5" id="num5">
+
+            </div>
+
+        <button onclick="calculate()" id="calculateButton">Calculate</button><br>
+        <div id="errorMessage"></div><br>
+
+        <div id="maximumNo"></div><br>
+
+        <div id="minimumNo"></div><br>
+
+        <div id="sumOfAllNumbers"></div>
+
+        
+        
+
+    </body>
+    <script src="script.js"></script>
+</body>
+
+</html>
+
+function calculate(){
+
+    let num1=(document.getElementById("num1") as HTMLInputElement).value;
+    let num2=(document.getElementById("num2") as HTMLInputElement).value;
+    let num3=(document.getElementById("num3") as HTMLInputElement).value;
+    let num4=(document.getElementById("num4") as HTMLInputElement).value;
+    let num5=(document.getElementById("num5") as HTMLInputElement).value;
+
+    if(!num1.trim() || !num2.trim() || !num3.trim() || !num4.trim() || !num5.trim()) document.getElementById("errorMessage").innerHTML="Enter all the numbers";
+    else{let nums:number[]=[parseInt(num1),parseInt(num2),parseInt(num3),parseInt(num4),parseInt(num5)];
+
+    document.getElementById("maximumNo").innerHTML="<b>Maximum number: </b>"+Math.max(...nums);
+    document.getElementById("minimumNo").innerHTML="<b>Minimum number: </b>"+Math.min(...nums);
+
+    let total=0;
+    for(let i of nums)
+    {
+        total+=i;
+    }
+    document.getElementById("sumOfAllNumbers").innerHTML="<b>Sum of all numbers: </b>"+total;
+    }
+}
