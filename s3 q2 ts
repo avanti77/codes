@@ -1,0 +1,62 @@
+
+
+class Attendee{
+    private name :string;
+    private email :string;
+    private phoneNumber :string;
+    private event :string;
+
+    constructor(name :string , email :string,phoneNumber :string,event :string){
+        this.name = name;
+        this.email=email;
+        this.phoneNumber =phoneNumber;
+        this.event = event;
+    }
+
+    public validateData(){
+        let p : Promise<string> = new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+                  if(this.name.trim().length==0){
+                    reject("Name must not be empty.")
+                  }
+                  else
+                  {
+                      let ex=/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+                      if(!this.email.match(ex))
+                      {
+                          reject("Email must be a valid email address.");
+                      }
+                      else if(this.phoneNumber.length< 8)
+                      {
+                          reject("Phone number must be a 10-digit number.");
+                      }
+                      else if(this.event=="s")
+                      {
+                          reject("Event must be selected from the predefined list.");
+                      }
+                      else
+                      {
+                          resolve("Success! Registration is complete.");
+                      }
+                  }
+            })
+
+    });
+        return p;
+    }
+}
+
+function submitForm()
+{
+    let name=(document.getElementById("name") as HTMLInputElement).value;
+    let email=(document.getElementById("email") as HTMLInputElement).value;
+    let phoneNumber=(document.getElementById("phoneNumber") as HTMLInputElement).value;
+    let event=(document.getElementById("event") as HTMLInputElement).value;
+
+    let user=new Attendee(name,email,phoneNumber,event);
+
+    let promise= user.validateData();
+    promise.then((msg)=> document.getElementById("successMessage").innerHTML=msg)
+    .catch((msg)=> document.getElementById("errorMessage").innerHTML=msg);
+
+}
