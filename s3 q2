@@ -1,0 +1,44 @@
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+
+</head>
+<body>
+    <h1>Event Registration Form</h1>
+    <div class="container">
+        <div class="form-group">
+            <label for="name">Name*:</label>
+            <input type="text" name="name" id="name">
+            <br>
+        </div>
+        <div class="form-group">
+            <label for="email">Email*:</label>
+            <input type="text" name="email" id="email">
+            <br>
+        </div>
+        <div class="form-group">
+            <label for="phoneNumber">Phone Number*:</label>
+            <input type="text" name="phoneNumber" id="phoneNumber">
+            <br>
+        </div>
+        <div class="form-group">
+            <select name="event" id="event">
+                <option value="s">Select an event</option>
+                <option value="Conference">Conference</option>
+                <option value="Workshop">Workshop</option>
+                <option value="Seminar">Seminar</option>
+            </select>
+            <br>
+        </div>
+
+    <button id="submitButton" onclick="submitForm()">Submit</button>
+        <div id="successMessage"></div>
+        <div id="errorMessage"></div>
+    </div>
+    <script src="script.js"></script>
+
+</body>
+</html>
