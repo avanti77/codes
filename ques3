@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+   
+</head>
+<body>
+    <body class="container">
+        <h1>Fruit Basket</h1>
+        <input type="text" name="fruit" id="fruitInput">
+        <button onclick="addFruit()" id="addFruitButton">Add Fruit</button>
+        <div id="fruitList"></div>
+        <div id="errorMessage"></div>
+    </body>
+    <script src="script.js"></script>
+</body>
+</html>
+let fruits:string[]=[];
+function addFruit(){
+    let f=(document.getElementById("fruitInput") as HTMLInputElement).value;
+    if(f.trim().length==0)
+    {
+        document.getElementById("errorMessage").innerHTML="Fruit name is required.";
+    }
+    else
+    {
+        fruits.push(f);
+        document.getElementById("fruitList").innerHTML="Fruits: "+fruits.join(", ");
+}
+    }
+    
+
