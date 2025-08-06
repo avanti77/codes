@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+   
+</head>
+<body>
+   <body class="container">
+    <h1>Array Operations</h1>
+
+    <div id="num">
+        <label for="number1">Enter Number 1*:</label>
+        <input type="text" name="number1" id="num1">
+    </div>
+    <div id="num">
+        <label for="number2">Enter Number 2*:</label>
+        <input type="text" name="number2" id="num2">
+    </div>
+    <div id="num">
+        <label for="number3">Enter Number 3*:</label>
+        <input type="text" name="number3" id="num3">
+    </div>
+    <div id="num">
+        <label for="number4">Enter Number 4*:</label>
+        <input type="text" name="number4" id="num4">
+    </div>
+    <div id="num">
+        <label for="number5">Enter Number 5*:</label>
+        <input type="text" name="number5" id="num5">
+    </div>
+    <button onclick="calculate()" id="calculateButton">Calculate</button>
+    <div id="sumOfEven"></div>
+    <div id="numbersGreaterThan5"></div>
+    <div id="errorMessage"></div>
+
+
+    <script src="script.js"></script>
+   </body>
+</body>
+</html>
+
+
+function calculate(){
+
+    let num1=(document.getElementById("num1") as HTMLInputElement).value.trim();
+    let num2=(document.getElementById("num2") as HTMLInputElement).value.trim();
+    let num3=(document.getElementById("num3") as HTMLInputElement).value.trim();
+    let num4=(document.getElementById("num4") as HTMLInputElement).value.trim();
+    let num5=(document.getElementById("num5") as HTMLInputElement).value.trim();
+
+    if(!num1 || !num2 || !num3 || !num4 || !num5)
+    {
+        document.getElementById("errorMessage").innerHTML="enter all the numbers";
+    }
+    else 
+    {
+        let total=0;
+        let nums:number[] =[parseInt(num1),parseInt(num2),parseInt(num3),parseInt(num4),parseInt(num5)];
+        let list:number[]=[];
+        for(let n of nums)
+        {
+            if(!isNaN(n))
+            {
+                if(n % 2===0)
+                {
+                    total+=n;
+                }
+                if(n>5)
+                {
+                    list.push(n);
+                }
+            }
+            
+        }
+
+        document.getElementById("sumOfEven").innerHTML="Sum of even numbers: "+total;
+
+        let output="Numbers greater than 5: ";
+        document.getElementById("numbersGreaterThan5").innerHTML=output+list.join(", ");
+    }
+
+}
